@@ -1,6 +1,6 @@
 <?php
 
-namespace Gofish\Datatable;
+namespace Dykhuizen\Datatable;
 
 use Gofish\Datatable\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;

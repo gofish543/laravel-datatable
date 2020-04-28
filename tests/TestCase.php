@@ -1,9 +1,9 @@
 <?php
 
-namespace Gofish\Datatable\Tests;
+namespace Dykhuizen\Datatable\Tests;
 
-use Gofish\Datatable\Datatable;
-use Gofish\Datatable\DatatableServiceProvider;
+use Dykhuizen\Datatable\Datatable;
+use Dykhuizen\Datatable\DatatableServiceProvider;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Model;
@@ -15,16 +15,16 @@ use ReflectionException;
 
 class TestCase extends BaseTestCase
 {
-	/** @var \Gofish\Datatable\Tests\User */
+	/** @var \Dykhuizen\Datatable\Tests\User */
 	protected $user;
 
-	/** @var \Gofish\Datatable\Tests\Profile */
+	/** @var \Dykhuizen\Datatable\Tests\Profile */
 	protected $profile;
 
-	/** @var \Gofish\Datatable\Tests\Comment */
+	/** @var \Dykhuizen\Datatable\Tests\Comment */
 	protected $comment;
 
-	/** @var \Gofish\Datatable\Tests\Post */
+	/** @var \Dykhuizen\Datatable\Tests\Post */
 	protected $post;
 
 	public function setUp(): void

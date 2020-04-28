@@ -1,8 +1,8 @@
 <?php
 
-namespace Gofish\Datatable\Tests\Unit;
+namespace Dykhuizen\Datatable\Tests\Unit;
 
-use Gofish\Datatable\Tests\TestCase;
+use Dykhuizen\Datatable\Tests\TestCase;
 
 class DatatableTest extends TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gofish\Datatable\Tests\Unit\Traits;
+namespace Dykhuizen\Datatable\Tests\Unit\Traits;
 
-use Gofish\Datatable\Tests\TestCase;
+use Dykhuizen\Datatable\Tests\TestCase;
 use Illuminate\Support\Facades\Request;
 
 class FilterableTest extends TestCase

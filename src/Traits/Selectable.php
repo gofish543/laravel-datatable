@@ -1,6 +1,6 @@
 <?php
 
-namespace Gofish\Datatable\Traits;
+namespace Dykhuizen\Datatable\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
@@ -19,7 +19,7 @@ trait Selectable {
      */
     public function scopeSelectable($query) {
         if (request()->hasFilled([$this->selectableFieldsKey])) {
-            /** @var \Gofish\Datatable\Traits\Selectable $class */
+            /** @var \Dykhuizen\Datatable\Traits\Selectable $class */
             $class = get_class($this);
             $class::$selectableFields = $this->filterAndExplode(
             	request()->input($this->selectableFieldsKey, '')
@@ -46,7 +46,7 @@ trait Selectable {
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Model|\Gofish\Datatable\Traits\Selectable $model
+     * @param \Illuminate\Database\Eloquent\Model|\Dykhuizen\Datatable\Traits\Selectable $model
      * @param array $select
      * @param integer $currentDepth
      * @param integer $maxDepth

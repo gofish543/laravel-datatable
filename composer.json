@@ -1,5 +1,5 @@
 {
-	"name": "gofish/laravel-datatable",
+	"name": "dykhuizen/laravel-datatable",
 	"description": "A Laravel package that contains queries for constructing a datatable",
 	"keywords": [
 		"sorting",
@@ -11,6 +11,13 @@
 	],
 	"homepage": "https://github.com/gofish543/laravel-datatable",
 	"license": "MIT",
+	"authors": [
+		{
+			"name": "Nicholas Dykhuizen",
+			"email": "nicholas@dykhuizen.com",
+			"role": "Developer"
+		}
+	],
 	"require": {
 		"php": "^7.4",
 		"illuminate/database": "^7.0",
@@ -22,18 +29,18 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Gofish\\Datatable\\": "src/"
+			"Dykhuizen\\Datatable\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Gofish\\Datatable\\Tests\\": "tests/"
+			"Dykhuizen\\Datatable\\Tests\\": "tests/"
 		}
 	},
 	"extra": {
 		"laravel": {
 			"providers": [
-				"Gofish\\Datatable\\DatatableServiceProvider"
+				"Dykhuizen\\Datatable\\DatatableServiceProvider"
 			]
 		}
 	},

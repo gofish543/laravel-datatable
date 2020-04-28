@@ -1,6 +1,6 @@
 <?php
 
-namespace Gofish\Datatable\Traits;
+namespace Dykhuizen\Datatable\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 

@@ -9,7 +9,7 @@
 		 processIsolation="false"
 		 stopOnFailure="false">
 	<testsuites>
-		<testsuite name="Gofish Unit Test Suite">
+		<testsuite name="Dykhuizen Unit Test Suite">
 			<directory suffix="Test.php">./tests/Unit</directory>
 		</testsuite>
 	</testsuites>
