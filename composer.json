@@ -1,0 +1,34 @@
+{
+  "name": "dykhuizen/datatable",
+  "description": "Package for handling datatables in Laravel 5.x",
+  "keywords": [
+    "sortable",
+    "sorting",
+    "column",
+    "sort",
+    "laravel"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nicholas Dykhuizen",
+      "email": "nicholas@dykhuizen.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "Dykhuizen\\Datatable\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Dykhuizen\\Datatable\\DatatableServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
