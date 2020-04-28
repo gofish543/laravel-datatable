@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykhuizen\Datatable;
+namespace Gofish\Datatable;
 
 use Illuminate\Support\ServiceProvider;
 

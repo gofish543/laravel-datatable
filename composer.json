@@ -1,34 +1,45 @@
 {
-  "name": "dykhuizen/datatable",
-  "description": "Package for handling datatables in Laravel 5.x",
-  "keywords": [
-    "sortable",
-    "sorting",
-    "column",
-    "sort",
-    "laravel"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Nicholas Dykhuizen",
-      "email": "nicholas@dykhuizen.com"
-    }
-  ],
-  "require": {},
-  "require-dev": {},
-  "autoload": {
-    "psr-4": {
-      "Dykhuizen\\Datatable\\": "src/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Dykhuizen\\Datatable\\DatatableServiceProvider"
-      ]
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+	"name": "gofish/laravel-datatable",
+	"description": "A Laravel package that contains queries for constructing a datatable",
+	"keywords": [
+		"sorting",
+		"filtering",
+		"selecting",
+		"paginating",
+		"searching",
+		"laravel"
+	],
+	"homepage": "https://github.com/gofish543/laravel-datatable",
+	"license": "MIT",
+	"require": {
+		"php": "^7.4",
+		"illuminate/database": "^7.0",
+		"illuminate/support": "^7.0"
+	},
+	"require-dev": {
+		"orchestra/testbench": "^5.2",
+		"phpunit/phpunit": "^9.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Gofish\\Datatable\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Gofish\\Datatable\\Tests\\": "tests/"
+		}
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Gofish\\Datatable\\DatatableServiceProvider"
+			]
+		}
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }

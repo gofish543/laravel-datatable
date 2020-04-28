@@ -1,0 +1,21 @@
+# Ignore Javascript Vendor
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# PHP Vendor
+/vendor
+
+# JetBrains
+/.idea
+
+# PHP
+.phpunit.result.cache
+
+# Laravel
+/.vagrant
+Homestead.json
+Homestead.yaml
+.env
+.env.dusk.local
+.env.local

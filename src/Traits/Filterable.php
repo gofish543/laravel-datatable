@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykhuizen\Datatable;
+namespace Gofish\Datatable\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -8,19 +8,22 @@ use Illuminate\Support\Str;
 
 trait Filterable {
 
+	/** @var string  */
+	protected $filterableFieldsKey = 'filter';
+
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFilterable(Builder $query) {
-        if (request()->hasFilled(['filter'])) {
+        if (request()->hasFilled([$this->filterableFieldsKey])) {
             $params = [
-                'filter' => $this->filterAndExplode(request()->input('filter'))
+                'filter' => $this->filterAndExplode(request()->input($this->filterableFieldsKey))
             ];
 
             foreach (request()->all() as $key => $item) {
-                if (strstr($key, 'filter_')) {
-                    $params[str_replace('filter_', '', $key)] = $this->filterAndExplode($item ?: '');
+                if (strstr($key, "{$this->filterableFieldsKey}_")) {
+                    $params[str_replace("{$this->filterableFieldsKey}_", '', $key)] = $this->filterAndExplode($item ?: '');
                 }
             }
 
@@ -77,7 +80,7 @@ trait Filterable {
      */
     private function applyFilterQuery(Builder $query, Model $model, string $column, array $values, string $where = 'orWhere') {
         if (count($values) == 0) {
-            $query = $query->whereRaw('FALSE = TRUE');
+            $query = $this->nullQuery($query);
         } else if (method_exists($model, Str::camel($column) . 'Filterable')) {
             $query = call_user_func_array([$this, Str::camel($column) . 'Filterable'], [$query, $values]);
         } else if ($this->columnExists($model, $column)) {

@@ -1,23 +1,29 @@
 <?php
 
-namespace Dykhuizen\Datatable;
+namespace Gofish\Datatable\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
 trait Selectable {
 
-    public static array $selectableFields = [];
+	/** @var array */
+	public static array $selectableFields = [];
+
+	/** @var string  */
+	protected $selectableFieldsKey = 'selectableFields';
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
     public function scopeSelectable($query) {
-        if (request()->hasFilled(['selectable'])) {
-            /** @var \Dykhuizen\Datatable\Selectable $class */
+        if (request()->hasFilled([$this->selectableFieldsKey])) {
+            /** @var \Gofish\Datatable\Traits\Selectable $class */
             $class = get_class($this);
-            $class::$selectableFields = $this->filterAndExplode(request()->input('selectable', ''));
+            $class::$selectableFields = $this->filterAndExplode(
+            	request()->input($this->selectableFieldsKey, '')
+			);
         }
 
         return $query;
@@ -40,7 +46,7 @@ trait Selectable {
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Model|\Dykhuizen\Datatable\Selectable $model
+     * @param \Illuminate\Database\Eloquent\Model|\Gofish\Datatable\Traits\Selectable $model
      * @param array $select
      * @param integer $currentDepth
      * @param integer $maxDepth
@@ -50,7 +56,7 @@ trait Selectable {
         $response = [];
 
         if ($currentDepth <= $maxDepth) {
-            if ($select == '*' || $select == "") {
+            if ($select == "") {
                 return $model->toArray();
             } else {
                 foreach ($select as $key => $value) {

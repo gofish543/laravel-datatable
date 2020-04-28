@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykhuizen\Datatable;
+namespace Gofish\Datatable\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -9,18 +9,23 @@ use Illuminate\Support\Str;
 
 trait Searchable {
 
+	/** @var string */
+	protected $searchableColumnsKey = 'searchColumns';
+
+	/** @var string */
+	protected $searchableSearchKey = 'search';
+
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearchable(Builder $query) {
-        if (request()->hasFilled(['search', 'searchable'])) {
-            return $this->querySearchBuilder($query, request()->only(['search', 'searchable']));
+        if (request()->hasFilled([$this->searchableColumnsKey, $this->searchableSearchKey])) {
+            return $this->querySearchBuilder($query, request()->only([$this->searchableColumnsKey, $this->searchableSearchKey]));
         }
 
         return $query;
     }
-
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -29,8 +34,8 @@ trait Searchable {
      */
     private function querySearchBuilder($query, array $params) {
         return $query->where(function (Builder $query) use ($params) {
-            $search = $params['search'];
-            $columns = $this->filterAndExplode($params['searchable']);
+            $search = $params[$this->searchableSearchKey];
+            $columns = $this->filterAndExplode($params[$this->searchableColumnsKey]);
 
             foreach ($columns as $column) {
                 /** @var \Illuminate\Database\Eloquent\Model $model */

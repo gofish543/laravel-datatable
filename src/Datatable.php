@@ -1,14 +1,15 @@
 <?php
 
-namespace Dykhuizen\Datatable;
+namespace Gofish\Datatable;
 
+use Gofish\Datatable\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
-use Schema;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * @method static static|self|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder datatable()
@@ -20,11 +21,11 @@ use Schema;
  */
 trait Datatable {
 
-    use Searchable;
-    use Sortable;
-    use Selectable;
-    use Paginateable;
-    use Filterable;
+    use Traits\Searchable;
+    use Traits\Sortable;
+    use Traits\Selectable;
+    use Traits\Paginateable;
+    use Traits\Filterable;
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder|self $query
@@ -61,13 +62,13 @@ trait Datatable {
             };
         }
 
-        return array_filter(
+        return array_values(array_filter(
             explode(',',
                 trim(
                     str_replace(', ', ',', $phrase), " \t\n\r\0\x0B,"
                 )
             ), $filterFunction
-        );
+        ));
     }
 
     /**
@@ -126,20 +127,7 @@ trait Datatable {
             return $this->nullQuery($query);
         }
 
-        return $this->formJoin($query, $parentTable, $relatedTable, $parentPrimaryKey, $relatedPrimaryKey);
-    }
-
-    /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $parentTable
-     * @param string $relatedTable
-     * @param string $parentPrimaryKey
-     * @param string $relatedPrimaryKey
-     *
-     * @return mixed
-     */
-    protected function formJoin($query, $parentTable, $relatedTable, $parentPrimaryKey, $relatedPrimaryKey) {
-        return $query->addSelect($parentTable . '.*')->leftJoin($relatedTable, $parentPrimaryKey, '=', $relatedPrimaryKey);
+		return $query->addSelect($parentTable . '.*')->leftJoin($relatedTable, $parentPrimaryKey, '=', $relatedPrimaryKey);
     }
 
     /**
