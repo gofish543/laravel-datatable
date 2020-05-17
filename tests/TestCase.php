@@ -40,7 +40,15 @@ class TestCase extends BaseTestCase
 		$this->post = new Post();
 	}
 
-	/**
+	public function tearDown(): void {
+        parent::tearDown();
+
+        User::$selectableFields = [];
+        Comment::$selectableFields = [];
+        Post::$selectableFields = [];
+    }
+
+    /**
 	 * Mock the schema hasColumn function
 	 *
 	 * @return void

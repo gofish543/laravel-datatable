@@ -83,7 +83,7 @@ trait Selectable {
                 }
 
                 // This will filter out all hidden / visible attributes
-                $response = $this->getArrayableItems($response);
+                $response = $model->getArrayableItems($response);
             }
         } else {
             abort(403, "Attempted to access invalid data");
