@@ -26,6 +26,16 @@ trait Datatable {
     use Traits\Selectable;
     use Traits\Paginateable;
     use Traits\Filterable;
+	
+    /**
+     * Initialize the datatable trait
+     *
+     * @return void
+     */
+    public function initializeDatatable() {
+        // Reset $selectableFields on initialization
+        self::$selectableFields = [];
+    }
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder|self $query
