@@ -10,27 +10,33 @@ use Illuminate\Database\Eloquent\Builder;
 trait Paginateable
 {
 
-	/** @var string */
-	protected $paginateablePageKey = 'page';
+    /** @var string */
+    protected $paginateablePageKey = 'page';
 
-	/** @var string */
-	protected $paginateablePerPageKey = 'per_page';
+    /** @var string */
+    protected $paginateablePerPageKey = 'per_page';
 
-	/**
-	 * @param \Illuminate\Database\Eloquent\Builder $query
-	 * @return \Illuminate\Database\Eloquent\Model[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
-	 */
-	public function scopePaginateable(Builder $query)
-	{
-		if (request()->hasFilled([$this->paginateablePageKey, $this->paginateablePerPageKey]))
-		{
-			return $query->paginate(
-				request()->input('per_page', $this->getPerPage()),
-				['*'],
-				$this->paginateablePageKey
-			);
-		}
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool $simple
+     * @return \Illuminate\Database\Eloquent\Model[]|\Illuminate\Contracts\Pagination\Paginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function scopePaginateable(Builder $query, $simple = false)
+    {
+        if (request()->hasFilled([$this->paginateablePageKey, $this->paginateablePerPageKey]))
+        {
+            return $simple ?
+                $query->simplePaginate(
+                    request()->input('per_page', $this->getPerPage()),
+                    ['*'],
+                    $this->paginateablePageKey
+                ) : $query->paginate(
+                    request()->input('per_page', $this->getPerPage()),
+                    ['*'],
+                    $this->paginateablePageKey
+                );
+        }
 
-		return $query->get();
-	}
+        return $query->get();
+    }
 }
