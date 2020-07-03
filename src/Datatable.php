@@ -32,8 +32,8 @@ trait Datatable {
      *
      * @return void
      */
-    public function initializeDatatable() {
-        // Reset $selectableFields on initialization
+    public function bootDatatable() {
+        // Reset $selectableFields on boot
         self::$selectableFields = [];
     }
 
