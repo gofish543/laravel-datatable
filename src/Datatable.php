@@ -32,7 +32,7 @@ trait Datatable {
      *
      * @return void
      */
-    public function bootDatatable() {
+    public static function bootDatatable() {
         // Reset $selectableFields on boot
         self::$selectableFields = [];
     }
