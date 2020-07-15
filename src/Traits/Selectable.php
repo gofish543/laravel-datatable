@@ -7,11 +7,11 @@ use Illuminate\Support\Arr;
 
 trait Selectable {
 
-	/** @var array */
-	public static array $selectableFields = [];
+    /** @var array */
+    public static array $selectableFields = [];
 
-	/** @var string  */
-	protected $selectableFieldsKey = 'selectableFields';
+    /** @var string */
+    protected $selectableFieldsKey = 'selectableFields';
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -22,8 +22,8 @@ trait Selectable {
             /** @var \Dykhuizen\Datatable\Traits\Selectable $class */
             $class = get_class($this);
             $class::$selectableFields = $this->filterAndExplode(
-            	request()->input($this->selectableFieldsKey, '')
-			);
+                request()->input($this->selectableFieldsKey, '')
+            );
         }
 
         return $query;
@@ -41,7 +41,7 @@ trait Selectable {
                 $select = Arr::add($select, $selectable, '');
             }
 
-            return $this->fetchSelect($this, $select, 1, 3);
+            return $this->fetchSelect($this, $select, 1, 5);
         }
     }
 
@@ -52,7 +52,7 @@ trait Selectable {
      * @param integer $maxDepth
      * @return null
      */
-    private function fetchSelect($model, $select, $currentDepth = 1, $maxDepth = 3) {
+    private function fetchSelect($model, $select, $currentDepth = 1, $maxDepth = 5) {
         $response = [];
 
         if ($currentDepth <= $maxDepth) {
