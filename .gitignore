@@ -5,6 +5,7 @@ yarn-error.log
 
 # PHP Vendor
 /vendor
+composer.lock
 
 # JetBrains
 /.idea
