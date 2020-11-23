@@ -2,7 +2,6 @@
 
 namespace Dykhuizen\Datatable;
 
-use Gofish\Datatable\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +16,8 @@ use Illuminate\Support\Facades\Schema;
  * @method static static|self|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder searchable()
  * @method static static|self|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder sortable()
  * @method static static|self|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder filterable()
- * @method static static|self|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder paginateable()
+ * @method static static|self|\Illuminate\Database\Eloquent\Collection paginateable($forcePagination = true)
+ * @method static static|self|\Illuminate\Database\Eloquent\Collection simplePaginateable($forcePagination = true)
  */
 trait Datatable {
 
@@ -26,7 +26,7 @@ trait Datatable {
     use Traits\Selectable;
     use Traits\Paginateable;
     use Traits\Filterable;
-	
+
     /**
      * Initialize the datatable trait
      *

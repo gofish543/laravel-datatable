@@ -23,7 +23,6 @@ class DatatableServiceProvider extends ServiceProvider {
         });
     }
 
-
     /**
      * Register the service provider.
      *

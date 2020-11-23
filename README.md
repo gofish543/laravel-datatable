@@ -19,6 +19,7 @@ This single trait gives you access the following traits:
 * Searchable - Applies a search query for selected columns
 * Filterable - Applies a list of filters to the query based on columns selected
 * Paginateable - Either runs the `$eloquent->get()` or `$eloquent->paginate()` methods based on the request
+* SimplePaginateable - Either runs the `$eloquent->get()` or `$eloquent->simplePaginate()` methods based on the request
 * Selectable - Selects the response data to be returned
 
 
@@ -139,13 +140,13 @@ public function addressFilterable($query, $filters)
 }
 ```
 
-## Paginateable
+## Paginateable and SimplePaginateable
 The paginateable columns default to `page` and `per_page` just like Laravel's built in pagination
 <br>
 These keys can be overwritten on a per model instance by setting the `$paginateablePageKey` and `$paginateablePerPageKey` variables.
 <br>
 If these keys exist, results will be paginated in the response.
-If these keys to not exist, results will be returned via the `get()` method
+If these keys do not exist, the $forcePagination function param will be checked. If true, results will be paginated according to Laravel defaults. If false, results will be retrieved via the `get()` method.
 <br>
 <br>
 Ex:
