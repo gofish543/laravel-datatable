@@ -113,9 +113,11 @@ trait Datatable {
     }
 
     /**
+     * Return the uniqueId generated for the join statement
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param \Illuminate\Database\Eloquent\Relations\Relation $relation
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return string
      */
     protected function queryJoinBuilder(Builder $query, Relation $relation) {
         $relatedTable = $relation->getRelated()->getTable();
@@ -127,17 +129,23 @@ trait Datatable {
             $relation->getParent()->setTable($parentTable);
         }
 
+        // Mark the left join by a random string
+        // This avoids any leftJoin's commited before or after this query call by the end user
+        $uniqueId = Str::random(16);
         if ($relation instanceof HasOne) {
+            // @todo doesn't work with uniqueId right now
             $relatedPrimaryKey = $relation->getQualifiedForeignKeyName();
             $parentPrimaryKey = $relation->getQualifiedParentKeyName();
         } elseif ($relation instanceof BelongsTo) {
-            $relatedPrimaryKey = $relation->getQualifiedOwnerKeyName();
+            $relatedPrimaryKey = "{$uniqueId}.{$relation->getOwnerKeyName()}";
             $parentPrimaryKey = $relation->getQualifiedForeignKeyName();
         } else {
             return $this->nullQuery($query);
         }
 
-		return $query->addSelect($parentTable . '.*')->leftJoin($relatedTable, $parentPrimaryKey, '=', $relatedPrimaryKey);
+        $query->leftJoin("{$relatedTable} as {$uniqueId}", $parentPrimaryKey, '=', $relatedPrimaryKey);
+
+        return $uniqueId;
     }
 
     /**
