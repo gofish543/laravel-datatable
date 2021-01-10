@@ -62,7 +62,12 @@ trait Sortable
 				{
 					$relation = $query->getRelation($relationName);
 					$model = $relation->getRelated();
-					$query = $this->queryJoinBuilder($query, $relation);
+
+					// Join the relation into the primary query
+                    // Set the related model's table to be the unique left join identifier
+					$joinId = $this->queryJoinBuilder($query, $relation);
+					$model->setTable($joinId);
+
 					$query = $this->applyOrderQuery($query, $model, $column, $direction);
 				}
 			}
@@ -92,7 +97,7 @@ trait Sortable
 		{
 			$query = call_user_func_array([$model, Str::camel($column) . 'Sortable'], [$query, $direction]);
 		}
-		elseif ($this->columnExists($model, $column))
+		elseif ($this->columnExists($model::make(), $column))
 		{
 			$column = $model->qualifyColumn($column);
 			$query = $query->orderBy($column, $direction);
