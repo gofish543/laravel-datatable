@@ -133,8 +133,7 @@ trait Datatable {
         // This avoids any leftJoin's commited before or after this query call by the end user
         $uniqueId = Str::random(16);
         if ($relation instanceof HasOne) {
-            // @todo doesn't work with uniqueId right now
-            $relatedPrimaryKey = $relation->getQualifiedForeignKeyName();
+            $relatedPrimaryKey = "{$uniqueId}.{$relation->getForeignKeyName()}";
             $parentPrimaryKey = $relation->getQualifiedParentKeyName();
         } elseif ($relation instanceof BelongsTo) {
             $relatedPrimaryKey = "{$uniqueId}.{$relation->getOwnerKeyName()}";
