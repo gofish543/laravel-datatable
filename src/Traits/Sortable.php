@@ -64,7 +64,7 @@ trait Sortable
 					$model = $relation->getRelated();
 
 					// Join the relation into the primary query
-                    // Set the related model's table to be the unique left join identifier
+                    			// Set the related model's table to be the unique left join identifier
 					$joinId = $this->queryJoinBuilder($query, $relation);
 					$model->setTable($joinId);
 
