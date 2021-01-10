@@ -36,7 +36,7 @@ class SortableTest extends TestCase
 			'sortOrder' => 'asc',
 		]);
 		$query = $this->user->newQuery()->sortable();
-		$this->assertStringContainsString("order by `{$this->profile->getTable()}`.`id` asc", $query->toSql());
+		$this->assertStringContainsString("left join `profiles` as `", $query->toSql());
 
 		// Assert that the Sortable function was called
 		Request::replace([
