@@ -125,16 +125,16 @@ class DatatableTest extends TestCase
 		// Left join user query
 		$query = $this->profile->newQuery()->with(['user']);
 		$relation = $query->getRelation('user');
-        $joinedId = $this->callMethod($this->user, 'queryJoinBuilder', [$query, $relation]);
-        $actualQuery = $query;
+        	$joinedId = $this->callMethod($this->user, 'queryJoinBuilder', [$query, $relation]);
+        	$actualQuery = $query;
 		$expectedQuery = $this->profile->newQuery()->leftJoin("users as {$joinedId}", 'profiles.user_id', '=', "{$joinedId}.id");
 		$this->assertEquals($expectedQuery->toSql(), $actualQuery->toSql());
 
 		// Left join with parent
 		$query = $this->comment->newQuery()->with(['parent']);
 		$relation = $query->getRelation('parent');
-        $joinedId = $this->callMethod($this->comment, 'queryJoinBuilder', [$query, $relation]);
-        $actualQuery = $query;
+        	$joinedId = $this->callMethod($this->comment, 'queryJoinBuilder', [$query, $relation]);
+        	$actualQuery = $query;
 		$expectedQuery = $this->comment->newQuery()->from('comments as parent_comments')
 			->leftJoin("comments as {$joinedId}", 'parent_comments.parent_id', '=', "{$joinedId}.id");
 		$this->assertEquals($expectedQuery->toSql(), $actualQuery->toSql());
@@ -142,8 +142,8 @@ class DatatableTest extends TestCase
 		// Left join on invalid relation class
 		$query = $this->user->newQuery()->with(['posts']);
 		$relation = $query->getRelation('posts');
-        $joinedId = $this->callMethod($this->user, 'queryJoinBuilder', [$query, $relation]);
-        $actualQuery = $query;
+        	$joinedId = $this->callMethod($this->user, 'queryJoinBuilder', [$query, $relation]);
+        	$actualQuery = $query;
 		$expectedQuery = $this->user->newQuery()->whereRaw('0 = 1');
 		$this->assertEquals($expectedQuery->toSql(), $actualQuery->toSql());
 	}
